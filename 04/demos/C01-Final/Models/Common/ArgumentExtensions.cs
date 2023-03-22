@@ -21,4 +21,8 @@ public static class ArgumentExtensions
     public static TimeSpan NonZero(this TimeSpan value, string name) =>
         value > TimeSpan.Zero ? value
         : throw new ArgumentException(name);
+
+    public static int InRange(this int value, int minInclusive, int maxExclusive, string name) =>
+      value >= minInclusive && value < maxExclusive ? value
+      : throw new ArgumentException(name);
 }
