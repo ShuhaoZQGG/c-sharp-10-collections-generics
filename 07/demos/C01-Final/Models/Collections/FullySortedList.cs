@@ -32,8 +32,21 @@ public class FullySortedList<T> : IOrderedList<T>
 // generic type interface
 public static class FullySortedList
 {
-  public static FullySortedList<T> ToFullySortedList<T>(this IEnumerable<T> sequence, IComparer<T> comparer)
+  public static IOrderedList<T> ToFullySortedList<T>(this IEnumerable<T> sequence, IComparer<T> comparer)
   {
     return new FullySortedList<T>(sequence, comparer);
   }
+  
+
+  // further encapsulation
+  public static IOrderedList<T> ToFullySortedList<T, TKey>
+    (this IEnumerable<T> sequence, Func<T, TKey> keySelector) 
+    where TKey : IComparable<TKey> =>
+    // call the above method
+    sequence.ToFullySortedList(Comparer(keySelector));
+
+  private static IComparer<T> Comparer<T, TKey>
+    (Func<T, TKey> keySelector)
+    where TKey: IComparable<TKey> =>
+    Comparer<T>.Create((a, b) => keySelector(a).CompareTo(keySelector(b)));
 }

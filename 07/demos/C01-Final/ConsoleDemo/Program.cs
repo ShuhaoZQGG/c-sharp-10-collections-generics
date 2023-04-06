@@ -14,7 +14,7 @@
   */
 
   Workers.GetWorkers(40)
-         .ToFullySortedList(Worker.RateComparer)
+         .ToFullySortedList(worker => worker.HourlyRate)
          .ToGrid(120, 2)
          .WriteLines();
 }
