@@ -28,3 +28,12 @@ public class FullySortedList<T> : IOrderedList<T>
 
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 }
+
+// generic type interface
+public static class FullySortedList
+{
+  public static FullySortedList<T> ToFullySortedList<T>(this IEnumerable<T> sequence, IComparer<T> comparer)
+  {
+    return new FullySortedList<T>(sequence, comparer);
+  }
+}
