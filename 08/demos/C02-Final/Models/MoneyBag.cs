@@ -4,6 +4,8 @@ public class MoneyBag : IEnumerable<Money>
 {
     public MoneyBag(IEnumerable<Money> moneys)
     {
+    // new() means create an instance the same type as this.CurrencyToBalance
+    // note at line 16 CurrencyToBalance has type Dictionary
         this.CurrencyToBalance = new();
         foreach (Money money in moneys) this.Add(money);
     }
